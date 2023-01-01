@@ -21,25 +21,24 @@ What should the edn file look like?
 {:title "My Annotated Document"
  :authorship "Unknown attribution"
  :frontmatter {:bylines ["This document is about foo."]}
- :content [{:quote [{:text "Some unmarked text to start the paragraph."}
-                    {:text "This gets marked."
-                     :mark {:id "descriptive-or-nondescript-id"}}
-                    {:text "Then, more unmarked text can follow."}
-                    {:text "Include your <strong>styles</strong> in the text."}]
-            :notes [{:id "descriptive-or-nondescript-id" ;; Must correspond ^
-                     :comments [{:text "The comment will match with the text."
-                                 :commenter "Me"}
-                                {:text "Any note can have arbitrary comments."}
-                                {:text "<code>:thread-level</code> is provided for indentation."
-                                 :commenter "Me"
-                                 :thread-level 1}]}]}]}
+ :content [[{:text "Some unmarked text to start the paragraph."}
+            {:text "This gets marked."
+             :mark {:id "descriptive-or-nondescript-id"
+                    :comments [{:text "The comment will match with the text."
+                                :commenter "Me"}
+                               {:text "Any note can have arbitrary comments."}
+                               {:text "<code>:thread-level</code> is provided for indentation."
+                                :commenter "Me"
+                                :thread-level 1}]}}
+            {:text "Then, more unmarked text can follow."}
+            {:text "Include your <strong>styles</strong> in the text."}]]}
 ```
 
 Will become...
 
 ![](repo-assets/demo-edn.png)
 
-Give a different map to `:content` for each paragraph, with keys `:quote` and `:notes`.
+Give a different vector of maps to `:content` for each paragraph, each containing `:text` and optionally `:mark`.
 
 Then, any of the following keys can be optionally provided for document-level metadata:
 

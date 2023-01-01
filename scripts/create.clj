@@ -27,6 +27,11 @@
                  :icon-png-32x32 ""
                  :icon-png-16x16 ""}}})
 
+(defn- split-notes
+  [data]
+  (let [f (fn [v] {:quote v :notes (vec (keep :mark v))})]
+    (update data :content #(mapv f %))))
+
 (defn- number-marks
   "Cheap hack to properly number highlighted text.
    1. Add sequential numbers only to text sections with marks.
@@ -59,6 +64,7 @@
   "Data transformations necessary for rendering."
   [data]
   (-> (util/deep-merge defaults data)
+      split-notes
       number-marks
       add-plug
       add-authorship-byline))
